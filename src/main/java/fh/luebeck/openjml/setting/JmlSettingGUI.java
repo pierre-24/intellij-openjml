@@ -17,6 +17,8 @@ public class JmlSettingGUI {
     private TextFieldWithBrowseButton pathToSolverTextBoxWithButton;
     private JComboBox<String> comboBoxSolvers;
     private JButton loadSolverButton;
+    private JCheckBox useClasspathCheckBox;
+    private JCheckBox useSourcepathCheckBox;
 
     public JPanel getRootPanel() {
         return rootPanel;
@@ -44,6 +46,14 @@ public class JmlSettingGUI {
 
     public JCheckBox getUseCustomSolverCheckBox() {
         return useCustomSolverCheckBox;
+    }
+
+    public JCheckBox getUseClasspathCheckBox() {
+        return useClasspathCheckBox;
+    }
+
+    public JCheckBox getUseSourcepathCheckBox() {
+        return useSourcepathCheckBox;
     }
 
     public TextFieldWithBrowseButton getPathToSolverTextBoxWithButton() {

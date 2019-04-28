@@ -7,10 +7,13 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.FileIndexFacade;
+import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
 import fh.luebeck.openjml.util.JmlRunUtil;
+import com.intellij.mock.MockFileIndexFacade;
 
 public class JmlRunAction extends AnAction {
 
@@ -21,7 +24,9 @@ public class JmlRunAction extends AnAction {
         if(virtualFile != null) {
             String pathToJavaFile = virtualFile.getCanonicalPath();
             try {
-                JmlRunUtil.runOpenJml(e.getProject(), pathToJavaFile);
+                final Module module = FileIndexFacade.getInstance(e.getProject()).getModuleForFile(virtualFile);
+                final String source = ProjectFileIndex.SERVICE.getInstance(e.getProject()).getSourceRootForFile(virtualFile).getCanonicalPath();
+                JmlRunUtil.runOpenJml(e.getProject(), module, source, pathToJavaFile);
             } catch (ExecutionException e1) {
                 e1.printStackTrace();
             }

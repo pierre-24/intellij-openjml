@@ -1,0 +1,27 @@
+<idea-plugin>
+  <version>1.0.2</version>
+  <change-notes>
+      Version 1.0.2 :  Set IntelliJ Version to 2018.3&lt;br&gt;
+      Version 1.0.1 :  Set IntelliJ Version to 2018.2&lt;br&gt;
+      Version 1.0.0 :  Initial release of this Plugin.&lt;br&gt;
+      
+      
+                </change-notes>
+  <idea-version since-build="183.4284" until-build="183.*"/>
+  <id>de.fhluebeck.opemjmlplugin</id>
+  <name>OpenJML/ESC</name>
+  <vendor email="support@sgcode.de" url="http://www.sgcode.de">sgcode</vendor>
+  <description>
+    This Plugin allows to run OpenJML/ESC to verify java programs annotated with JML.
+    </description>
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable instance="fh.luebeck.openjml.setting.JmlConfigurable"/>
+    <applicationService serviceImplementation="fh.luebeck.openjml.setting.JmlPersistantConfig"/>
+  </extensions>
+  <actions>
+    <group id="openjml-menu" text="Check">
+      <add-to-group group-id="MainMenu" anchor="last"/>
+      <action id="openjml-intellij-plugin.runaction" class="fh.luebeck.openjml.actions.JmlRunAction" text="Run Check"/>
+    </group>
+  </actions>
+</idea-plugin>

@@ -34,7 +34,7 @@ public class JmlConfigurable implements Configurable {
     @Nls
     @Override
     public String getDisplayName() {
-        return "OpenJml";
+        return "JML Checker";
     }
 
     @Nullable
@@ -47,7 +47,27 @@ public class JmlConfigurable implements Configurable {
         initBrowseListener();
         initLoadButton();
         initCustomSolverCheckBox();
+        initArgumentListener();
         return rootPanel;
+    }
+
+    private void initArgumentListener() {
+        mGUI.getUseClasspathCheckBox().addActionListener(f -> {
+            if (mGUI.getUseClasspathCheckBox().isSelected()) {
+                persistantState.setUseClasspath(true);
+            }
+            else {
+                persistantState.setUseClasspath(false);
+            }
+        });
+        mGUI.getUseSourcepathCheckBox().addActionListener(f -> {
+            if (mGUI.getUseSourcepathCheckBox().isSelected()) {
+                persistantState.setUseSourcepath(true);
+            }
+            else {
+                persistantState.setUseSourcepath(false);
+            }
+        });
     }
 
     private void loadSavedSettings() {
@@ -55,6 +75,8 @@ public class JmlConfigurable implements Configurable {
         mGUI.getComboBoxSolvers().addItem(persistantState.getSelectedSolver());
         mGUI.getComboBoxSolvers().setSelectedItem(persistantState.getSelectedSolver());
         mGUI.getUseCustomSolverCheckBox().setSelected(persistantState.isUseCustomSolver());
+        mGUI.getUseClasspathCheckBox().setSelected(persistantState.isUseClasspath());
+        mGUI.getUseSourcepathCheckBox().setSelected(persistantState.isUseSourcepath());
         if (mGUI.getUseCustomSolverCheckBox().isSelected()) {
             mGUI.getPathToSolverTextBoxWithButton().setEnabled(true);
             mGUI.getComboBoxSolvers().setEnabled(false);
@@ -80,6 +102,8 @@ public class JmlConfigurable implements Configurable {
     public void apply() {
         if (persistantState != null) {
             persistantState.setPathToOJml(mGUI.getPathToJMLTextBoxWithButton().getText());
+            persistantState.setUseClasspath(mGUI.getUseClasspathCheckBox().isSelected());
+            persistantState.setUseSourcepath(mGUI.getUseSourcepathCheckBox().isSelected());
             persistantState.setUseCustomSolver(mGUI.getUseCustomSolverCheckBox().isSelected());
             persistantState.setPathToCustomSolver(mGUI.getPathToSolverTextBoxWithButton().getText());
             String selectedItem = (String) mGUI.getComboBoxSolvers().getSelectedItem();

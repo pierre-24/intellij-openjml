@@ -18,7 +18,13 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.OrderEnumerator;
+import com.intellij.openapi.roots.impl.OrderEntryUtil;
+import com.intellij.util.PathUtil;
 import fh.luebeck.openjml.filter.JmlHyperlinkFilter;
 import fh.luebeck.openjml.setting.JmlPersistantConfig;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +34,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.*;
 
 import static com.intellij.openapi.ui.Messages.getErrorIcon;
 import static com.intellij.openapi.ui.Messages.showMessageDialog;
@@ -42,6 +49,22 @@ public class JmlRunUtil {
     private static final String PATH_TO_JRE = System.getProperty("java.home");
     private static final String OPENJML_JAR = "openjml.jar";
 
+    private static String getClasspath(Module module) {
+        String result = "";
+        boolean first = true;
+        String target = OrderEntryUtil.getModuleLibraries(ModuleRootManager.getInstance(module)).toString();
+        String pattern = "jar://([^!]*)!";
+        Matcher matcher = Pattern.compile(pattern)
+                .matcher(target);
+        while (matcher.find()) {
+            if (!first) {
+                result += ":";
+            }
+            result += matcher.group(1);
+            first = false;
+        }
+        return result;
+    }
 
     /**
      * Prepares and executes the OpenJML process.
@@ -50,9 +73,9 @@ public class JmlRunUtil {
      * @param canonicalPath Path to the actual java file.
      * @throws ExecutionException Exception if something went wrong while execution.
      */
-    public static void runOpenJml(Project project, String canonicalPath) throws ExecutionException {
+    public static void runOpenJml(Project project, Module module, String sourcePath, String canonicalPath) throws ExecutionException {
         // prepare command for execution
-        ArrayList<String> commands = prepareCommand(canonicalPath);
+        ArrayList<String> commands = prepareCommand(getClasspath(module), sourcePath, canonicalPath);
         if (commands.isEmpty()) {
             showMessageDialog("Please configure OpenJML first", "Error", getErrorIcon());
             return;
@@ -74,7 +97,7 @@ public class JmlRunUtil {
      * @return Command as ArrayList
      */
     @NotNull
-    private static ArrayList<String> prepareCommand(String pathToJavaFile) {
+    private static ArrayList<String> prepareCommand(String projectClasspath, String sourcePath, String pathToJavaFile) {
         ArrayList<String> commands = new ArrayList<>();
         if (JmlPersistantConfig.getInstance() != null && JmlPersistantConfig.getInstance().getState() != null) {
             if(JmlPersistantConfig.getInstance().getPathToOJml().isEmpty()) {
@@ -91,6 +114,14 @@ public class JmlRunUtil {
             } else if (!state.getSelectedSolver().isEmpty()){
                 commands.add("-exec");
                 commands.add(state.getSelectedSolver());
+            }
+            if (state.isUseClasspath() && !projectClasspath.equals("")) {
+                commands.add("-cp");
+                commands.add(projectClasspath);
+            }
+            if (state.isUseSourcepath() && sourcePath != null && !sourcePath.equals("")) {
+                commands.add("-sourcepath");
+                commands.add(sourcePath);
             }
             commands.add("-esc");
             commands.add(pathToJavaFile);
@@ -124,7 +155,7 @@ public class JmlRunUtil {
         panel.add(toolbar.getComponent(), "West");
         // create a new RunContent description.
         RunContentDescriptor runDescriptor = new RunContentDescriptor(consoleView,
-                runHandler, panel, "OpenJML", AllIcons.RunConfigurations.Application);
+                runHandler, panel, "Check", AllIcons.RunConfigurations.Application);
         // add actions to the toolbar buttons.
         AnAction[]
                 consoleActions = consoleView.createConsoleActions();

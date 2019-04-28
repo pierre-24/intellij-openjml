@@ -22,6 +22,8 @@ public class JmlPersistantConfig implements PersistentStateComponent<JmlPersista
     public Boolean useCustomSolver;
     public String selectedSolver;
     public String pathToCustomSolver;
+    public Boolean useClasspath;
+    public Boolean useSourcepath;
 
     public JmlPersistantConfig() {
         this.setDefaultValues();
@@ -35,6 +37,8 @@ public class JmlPersistantConfig implements PersistentStateComponent<JmlPersista
     public void setDefaultValues() {
         this.pathToOJml = "";
         this.useCustomSolver = false;
+        this.useClasspath = false;
+        this.useSourcepath = false;
         this.pathToCustomSolver = "";
         this.selectedSolver = "";
     }
@@ -58,6 +62,18 @@ public class JmlPersistantConfig implements PersistentStateComponent<JmlPersista
         this.pathToOJml = pathToOJml;
     }
 
+    public Boolean isUseClasspath() {
+        return useClasspath;
+    }
+
+    public Boolean isUseSourcepath() {
+        return useSourcepath;
+    }
+
+    public void setUseClasspath(Boolean useClasspath) {
+        this.useClasspath = useClasspath;
+    }
+
     public Boolean isUseCustomSolver() {
         return useCustomSolver;
     }
@@ -68,6 +84,10 @@ public class JmlPersistantConfig implements PersistentStateComponent<JmlPersista
 
     public String getSelectedSolver() {
         return selectedSolver;
+    }
+
+    public void setUseSourcepath(Boolean useSourcepath) {
+        this.useSourcepath = useSourcepath;
     }
 
     public void setSelectedSolver(String selectedSolver) {
