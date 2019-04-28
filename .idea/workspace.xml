@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9558a1f-26eb-464c-a5c4-a07743a23c44" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/actions/JmlRunAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/actions/JmlRunAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlConfigurable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlConfigurable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlPersistantConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlPersistantConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlSettingGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlSettingGUI.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlSettingGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/setting/JmlSettingGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/util/JmlRunUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fh/luebeck/openjml/util/JmlRunUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e9558a1f-26eb-464c-a5c4-a07743a23c44" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -342,7 +334,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="437" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556435782100" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556441959324" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -477,7 +469,7 @@
       <workItem from="1556431781692" duration="1666000" />
       <workItem from="1556433723368" duration="1542000" />
       <workItem from="1556435327331" duration="453000" />
-      <workItem from="1556435843942" duration="596000" />
+      <workItem from="1556435843942" duration="638000" />
     </task>
     <servers />
   </component>
@@ -496,7 +488,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20214000" />
+    <option name="totallyTimeSpent" value="20256000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -509,7 +501,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3319027" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -527,7 +518,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32884097" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32884097" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32771084" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32771084" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="CheckStyle" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />

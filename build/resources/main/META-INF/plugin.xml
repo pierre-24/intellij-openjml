@@ -1,6 +1,7 @@
 <idea-plugin>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <change-notes>
+      Version 1.0.3 :  Add Classpath and Sourcepath Support&lt;br&gt;
       Version 1.0.2 :  Set IntelliJ Version to 2018.3&lt;br&gt;
       Version 1.0.1 :  Set IntelliJ Version to 2018.2&lt;br&gt;
       Version 1.0.0 :  Initial release of this Plugin.&lt;br&gt;

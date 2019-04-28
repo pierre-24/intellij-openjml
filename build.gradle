@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'de.fhluebeck.openjmlplugin'
-version '1.0.2'
+version '1.0.3'
 
 apply plugin: 'java'
 
@@ -26,6 +26,7 @@ intellij {
 
 patchPluginXml {
     changeNotes """
+      Version 1.0.3 :  Add Classpath and Sourcepath Support<br>
       Version 1.0.2 :  Set IntelliJ Version to 2018.3<br>
       Version 1.0.1 :  Set IntelliJ Version to 2018.2<br>
       Version 1.0.0 :  Initial release of this Plugin.<br>
