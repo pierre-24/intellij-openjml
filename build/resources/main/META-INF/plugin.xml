@@ -1,5 +1,5 @@
 <idea-plugin>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <change-notes>
       Version 1.0.3 :  Add Classpath and Sourcepath Support&lt;br&gt;
       Version 1.0.2 :  Set IntelliJ Version to 2018.3&lt;br&gt;
@@ -8,7 +8,7 @@
       
       
                 </change-notes>
-  <idea-version since-build="183.4284" until-build="183.*"/>
+  <idea-version since-build="192.5728" until-build="192.*"/>
   <id>de.fhluebeck.opemjmlplugin</id>
   <name>OpenJML/ESC</name>
   <vendor email="support@sgcode.de" url="http://www.sgcode.de">sgcode</vendor>

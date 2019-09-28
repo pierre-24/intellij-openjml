@@ -88,6 +88,7 @@ public class JmlRunUtil {
         ConsoleViewImpl consoleViewInstance = (ConsoleViewImpl) initProcessOutputConsole(osProcessHandler, project, DefaultRunExecutor.getRunExecutorInstance());
         // Print Start Information
         consoleViewInstance.print("Start OpenJML/ESC with file " + canonicalPath.substring(canonicalPath.lastIndexOf("/") + 1) + "\n", ConsoleViewContentType.NORMAL_OUTPUT);
+        consoleViewInstance.print("Command is " + commands + "\n", ConsoleViewContentType.NORMAL_OUTPUT);
     }
 
     /**
@@ -108,13 +109,14 @@ public class JmlRunUtil {
             commands.add("-jar");
             commands.add(state.getPathToOJml() + File.separator + OPENJML_JAR);
             // Set -exec argument only if a solver is available.
-            if (state.isUseCustomSolver() && !state.getPathToCustomSolver().isEmpty()) {
+            // NOTE: removed solver, because I got "Stream closed" errors
+            /*if (state.isUseCustomSolver() && !state.getPathToCustomSolver().isEmpty()) {
                 commands.add("-exec");
                 commands.add(state.getPathToCustomSolver());
             } else if (!state.getSelectedSolver().isEmpty()){
                 commands.add("-exec");
                 commands.add(state.getSelectedSolver());
-            }
+            }*/
             if (state.isUseClasspath() && !projectClasspath.equals("")) {
                 commands.add("-cp");
                 commands.add(projectClasspath);
@@ -125,8 +127,8 @@ public class JmlRunUtil {
             }
             commands.add("-esc");
             commands.add(pathToJavaFile);
-            return commands;
         }
+
         return commands;
     }
 
