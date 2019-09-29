@@ -3,7 +3,7 @@ This Plugin provides the OpenJML/ESC to IntelliJ IDEA.
 
 ## Getting started
 
-### Installtion
+### Installation
 You can download the Plugin from https://plugins.jetbrains.com/plugin/11072-openjml-esc as a zip file or use the intelliJ build-in plugin manager (Settings -> Plugins) to install the plugin.
 
 ### OpenJML Download
