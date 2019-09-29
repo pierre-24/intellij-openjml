@@ -114,14 +114,13 @@ public class JmlRunUtil {
             commands.add(state.getPathToOJml() + File.separator + OPENJML_JAR);
 
             // Set -exec argument only if a solver is available.
-            // TODO: I (pierre-24) removed this, because I got "Stream closed" errors (comming from OpenJML)
-            /*if (state.isUseCustomSolver() && !state.getPathToCustomSolver().isEmpty()) {
+            if (state.isUseCustomSolver() && !state.getPathToCustomSolver().isEmpty()) {
                 commands.add("-exec");
                 commands.add(state.getPathToCustomSolver());
             } else if (!state.getSelectedSolver().isEmpty()){
                 commands.add("-exec");
                 commands.add(state.getSelectedSolver());
-            }*/
+            }
 
             if (state.isUseClasspath() && !projectClasspath.equals("")) {
                 commands.add("-cp");
