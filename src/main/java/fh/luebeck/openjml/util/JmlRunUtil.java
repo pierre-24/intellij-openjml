@@ -22,9 +22,9 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.impl.OrderEntryUtil;
-import com.intellij.util.PathUtil;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.projectRoots.Sdk;
 import fh.luebeck.openjml.filter.JmlHyperlinkFilter;
 import fh.luebeck.openjml.setting.JmlPersistantConfig;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +46,6 @@ public class JmlRunUtil {
     /**
      * Path to JRE
      */
-    private static final String PATH_TO_JRE = System.getProperty("java.home");
     private static final String OPENJML_JAR = "openjml.jar";
 
     private static String getClasspath(Module module) {
@@ -74,8 +73,11 @@ public class JmlRunUtil {
      * @throws ExecutionException Exception if something went wrong while execution.
      */
     public static void runOpenJml(Project project, Module module, String sourcePath, String canonicalPath) throws ExecutionException {
+        // get project SDK
+        Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
+
         // prepare command for execution
-        ArrayList<String> commands = prepareCommand(getClasspath(module), sourcePath, canonicalPath);
+        ArrayList<String> commands = prepareCommand(projectSdk.getHomePath(), getClasspath(module), sourcePath, canonicalPath);
         if (commands.isEmpty()) {
             showMessageDialog("Please configure OpenJML first", "Error", getErrorIcon());
             return;
@@ -88,28 +90,31 @@ public class JmlRunUtil {
         ConsoleViewImpl consoleViewInstance = (ConsoleViewImpl) initProcessOutputConsole(osProcessHandler, project, DefaultRunExecutor.getRunExecutorInstance());
         // Print Start Information
         consoleViewInstance.print("Start OpenJML/ESC with file " + canonicalPath.substring(canonicalPath.lastIndexOf("/") + 1) + "\n", ConsoleViewContentType.NORMAL_OUTPUT);
-        consoleViewInstance.print("Command is " + commands + "\n", ConsoleViewContentType.NORMAL_OUTPUT);
+        consoleViewInstance.print("Command is " + String.join(" ", commands) + "\n", ConsoleViewContentType.NORMAL_OUTPUT);
     }
 
     /**
      * Prepares the command to execute OpenJML.
      *
+     * @param pathToJRE path to the JRE
      * @param pathToJavaFile Path to the java file.
      * @return Command as ArrayList
      */
     @NotNull
-    private static ArrayList<String> prepareCommand(String projectClasspath, String sourcePath, String pathToJavaFile) {
+    private static ArrayList<String> prepareCommand(String pathToJRE, String projectClasspath, String sourcePath, String pathToJavaFile) {
         ArrayList<String> commands = new ArrayList<>();
         if (JmlPersistantConfig.getInstance() != null && JmlPersistantConfig.getInstance().getState() != null) {
             if(JmlPersistantConfig.getInstance().getPathToOJml().isEmpty()) {
                 return commands;
             }
+
             JmlPersistantConfig state = JmlPersistantConfig.getInstance().getState();
-            commands.add(PATH_TO_JRE + File.separator + "bin" + File.separator + "java");
+            commands.add(pathToJRE + File.separator + "bin" + File.separator + "java");
             commands.add("-jar");
             commands.add(state.getPathToOJml() + File.separator + OPENJML_JAR);
+
             // Set -exec argument only if a solver is available.
-            // NOTE: removed solver, because I got "Stream closed" errors
+            // TODO: I (pierre-24) removed this, because I got "Stream closed" errors (comming from OpenJML)
             /*if (state.isUseCustomSolver() && !state.getPathToCustomSolver().isEmpty()) {
                 commands.add("-exec");
                 commands.add(state.getPathToCustomSolver());
@@ -117,6 +122,7 @@ public class JmlRunUtil {
                 commands.add("-exec");
                 commands.add(state.getSelectedSolver());
             }*/
+
             if (state.isUseClasspath() && !projectClasspath.equals("")) {
                 commands.add("-cp");
                 commands.add(projectClasspath);
