@@ -14,11 +14,10 @@
     </extensions>
 
     <actions>
-        <group id="openjml-menu" text="Check">
-            <add-to-group group-id="MainMenu" anchor="last"/>
-            <action id="openjml-intellij-plugin.runaction"
-                    class="fh.luebeck.openjml.actions.JmlRunAction"
-                    text="Run Check"/>
-        </group>
+        <action id="openjml-intellij-plugin.runaction"
+                class="fh.luebeck.openjml.actions.JmlRunAction"
+                text="Run OpenJML" description="Run OpenJML on the current file">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut first-keystroke="control shift O" keymap="$default"/></action>
     </actions>
 </idea-plugin>
