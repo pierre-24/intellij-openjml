@@ -1,10 +1,12 @@
 # OpenJML Plugin for IntelliJ IDEA  
-This Plugin provides the OpenJML/ESC to IntelliJ IDEA. 
+This Plugin provides the OpenJML/ESC to IntelliJ IDEA 2019.2. 
 
 ## Getting started
 
 ### Installation
-You can download the Plugin from https://plugins.jetbrains.com/plugin/11072-openjml-esc as a zip file or use the intelliJ build-in plugin manager (Settings -> Plugins) to install the plugin.
+Build the plugin using `./gradlew buildPlugin`. 
+A zip containing the plugin is then located in `build/distributions/`
+Use the intelliJ build-in plugin manager (Settings > Plugins) to install the plugin, by clicking the wheel, and select "Install Plugin from Disk".
 
 ### OpenJML Download
 After you successfully installed the plugin you have to choose how you want to get the OpenJML commandline tool. There are two possibilities:
